@@ -39,7 +39,7 @@ class TurboServiceTest {
 
     @Test
     void test_sendMessage() throws IOException, InterruptedException {
-        final Map<Long, List<String>> reviews = ReviewReader.getInstance().readReviews("review.txt");
+        final Map<Long, List<String>> reviews = ReviewReader.getInstance().readTextReviews("review.txt");
         final Map<Long, List<String>> summary = new HashMap<>();
         for (final Long productNo : reviews.keySet()) {
             Lists.partition(reviews.get(productNo), 10)

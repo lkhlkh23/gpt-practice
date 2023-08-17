@@ -43,4 +43,22 @@ public class ReviewWriter {
         workbook.write(new FileOutputStream(FILE_PATH + "summary-" + LocalDateTime.now() + ".xlsx"));
     }
 
+    public void saveReviews(final Map<Long, String> reviews) throws IOException {
+        final Workbook workbook = new XSSFWorkbook();
+        final Sheet sheet = workbook.createSheet("reviews");
+        final CellStyle wrapCellStyle = workbook.createCellStyle();
+        wrapCellStyle.setWrapText(true);
+        int index = 0;
+        for (final Long productNo : reviews.keySet()) {
+            final Row row = sheet.createRow(index++);
+            row.createCell(0).setCellValue(productNo);
+
+            final Cell reviewCell = row.createCell(1);
+            reviewCell.setCellStyle(wrapCellStyle);
+            reviewCell.setCellValue(reviews.get(productNo));
+        }
+
+        workbook.write(new FileOutputStream(FILE_PATH + "summary-" + LocalDateTime.now() + ".xlsx"));
+    }
+
 }
